@@ -9,11 +9,25 @@ const pool = require('./database.js');
 app.get('/qa/:product_id', (req, res) => {
   let product_id = req.params.product_id;
   // console.log(product_id);
+  let data = {
+    product_id: product_id,
+    results: [],
+  };
   pool.query(
-    'select * from questions where product_id = $1',
+    `SELECT question_id, 
+      question_body,
+      question_date, 
+      asker_name,
+      asker_email,
+      question_helpfulness
+      FROM questions WHERE  product_id = $1 AND reported = 0 
+      limit 50`,
     [product_id],
     (err, result) => {
       if (err) throw err;
+
+      data.results.push(result.rows);
+
       res.send(result.rows);
     }
   );

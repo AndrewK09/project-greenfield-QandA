@@ -4,6 +4,7 @@ const pool = require('./server/database.js');
 const fs = require('fs');
 
 var photoCount = 0;
+let options = { highWaterMark: 256 * 1024 };
 fs.createReadStream(path.join(__dirname, '../Desktop/answers_photos.csv'))
   .pipe(csv.parse({ headers: true }))
   .on('data', row => {
