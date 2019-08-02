@@ -1,6 +1,6 @@
-const Pool = require('pg').Pool;
-// connst Pool = require('pg-promise')()
-const { PG_CONFIG } = require('../config/config.js');
-const pool = new Pool(PG_CONFIG);
+const pgp = require('pg-promise')();
 
-module.exports = pool;
+const { PG_CONFIG } = require('../config/config.js');
+const db = pgp(PG_CONFIG);
+
+module.exports = db;
