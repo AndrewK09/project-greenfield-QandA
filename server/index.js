@@ -6,16 +6,9 @@ app.use(bodyParser.json());
 
 const pool = require('./database.js');
 
-app.get('/test', (req, res) => {
-  pool.query('select * from test', (err, result) => {
-    console.log(result.rows);
-    res.send(result.rows);
-  });
-});
-
 app.get('/qa/:product_id', (req, res) => {
   let product_id = req.params.product_id;
-  console.log(product_id);
+  // console.log(product_id);
   pool.query(
     'select * from questions where product_id = $1',
     [product_id],
@@ -27,7 +20,7 @@ app.get('/qa/:product_id', (req, res) => {
 });
 
 app.get('/answers', (req, res) => {
-  pool.query('select * from answers where answer_id < 10', (err, result) => {
+  pool.query('select * from answers where answer_id < 27', (err, result) => {
     res.send(result.rows);
   });
 });
