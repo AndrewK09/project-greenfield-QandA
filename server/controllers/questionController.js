@@ -20,4 +20,10 @@ module.exports = {
         res.sendStatus(500);
       });
   },
+  addQuestion: (req, res) => {
+    console.time();
+    console.log('req.params.product_id', req.params.product_id);
+    console.log('req.body', req.body);
+    res.sendStatus(201);
+  },
 };
