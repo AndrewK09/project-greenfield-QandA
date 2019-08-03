@@ -35,7 +35,7 @@ module.exports = {
   },
   markHelpful: question_id => {
     return db.none(
-      `update questions set helpfulness = helpfulness + 1 where question_id = $1;`,
+      `update questions set question_helpfulness = question_helpfulness + 1 where question_id = $1;`,
       [question_id]
     );
   },
