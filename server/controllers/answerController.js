@@ -41,10 +41,11 @@ module.exports = {
   },
   markHelpful: (req, res) => {
     const { answer_id } = req.params;
-
+    console.time('markHelpful');
     model
       .markHelpful(answer_id)
       .then(() => {
+        console.timeEnd('markHelpful');
         res.sendStatus(204);
       })
       .catch(err => {
@@ -54,10 +55,12 @@ module.exports = {
   },
   report: (req, res) => {
     const { answer_id } = req.params;
+    console.time('report');
 
     model
       .report(answer_id)
       .then(() => {
+        console.timeEnd('report');
         res.sendStatus(204);
       })
       .catch(err => {

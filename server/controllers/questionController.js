@@ -28,7 +28,7 @@ module.exports = {
     model
       .addQuestion(product_id, body)
       .then(() => {
-        console.time('addQuestion');
+        console.timeEnd('addQuestion');
         res.sendStatus(201);
       })
       .catch(err => {
@@ -38,10 +38,11 @@ module.exports = {
   },
   markHelpful: (req, res) => {
     const { question_id } = req.params;
-
+    console.time('questionHelpful');
     model
       .markHelpful(question_id)
       .then(() => {
+        console.timeEnd('questionHelpful');
         res.sendStatus(204);
       })
       .catch(err => {
@@ -51,10 +52,11 @@ module.exports = {
   },
   report: (req, res) => {
     const { question_id } = req.params;
-
+    console.time('questionReport');
     model
       .report(question_id)
       .then(() => {
+        console.timeEnd('questionReport');
         res.sendStatus(204);
       })
       .catch(err => {
