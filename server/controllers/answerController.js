@@ -38,4 +38,6 @@ module.exports = {
         res.sendStatus(500);
       });
   },
+  markHelpful: (req, res) => {},
+  report: (req, res) => {},
 };
