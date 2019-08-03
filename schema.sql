@@ -19,6 +19,7 @@ WITH (
 \COPY questions FROM 'csv/questions.csv' DELIMITER ',' CSV HEADER;
 SELECT setval('questions_question_id_seq', (SELECT count(*) from questions), true); 
 
+CREATE INDEX on questions (product_id) WHERE reported = 0;
 -- ===========================   ANSWERS    ==============================
 
 DROP TABLE IF EXISTS answers;
@@ -44,8 +45,9 @@ SELECT setval('answers_answer_id_seq', (SELECT count(*) from answers), true);
 ALTER TABLE answers
 ADD COLUMN photos jsonb[] DEFAULT '{}'::jsonb[];
 
+CREATE INDEX on answers (question_id) WHERE report = 0;
 -- ===========================   PHOTOS    ==============================
-DROP TABLE IF EXISTS photos;
+/* DROP TABLE IF EXISTS photos;
 CREATE TABLE photos
 (
     id serial,
@@ -59,4 +61,4 @@ WITH (
 
 \COPY photos from 'csv/answers_photos.csv' DELIMITER ',' CSV HEADER;
 
-SELECT setval('photos_id_seq', (SELECT count(*) from photos), true); 
+SELECT setval('photos_id_seq', (SELECT count(*) from photos), true);  */
