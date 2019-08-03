@@ -2,7 +2,7 @@
 DROP TABLE IF EXISTS "questions";
 CREATE TABLE questions
 (
-    question_id serial,
+    question_id SERIAL,
     product_id integer NOT NULL,
     question_body character varying(1000) COLLATE pg_catalog."default" NOT NULL,
     question_date date DEFAULT CURRENT_DATE,
@@ -15,10 +15,12 @@ CREATE TABLE questions
 WITH (
     OIDS = FALSE
 );
+
 \COPY questions FROM 'csv/questions.csv' DELIMITER ',' CSV HEADER;
 
-ALTER SEQUENCE seq RESTART;
-UPDATE questionAnswers SET question_id = DEFAULT;
+SELECT setval('questions_question_id_seq', (SELECT count(*) from questions), true); 
+
+
 
 -- DROP TABLE IF EXISTS public."answers";
 -- CREATE TABLE public."answers"
@@ -26,7 +28,7 @@ UPDATE questionAnswers SET question_id = DEFAULT;
 --     answer_id integer NOT NULL,
 --     question_id integer,
 --     body character varying(1000) COLLATE pg_catalog."default",
---     date date,
+--     date date DEFAULT CURRENT_DATE,
 --     answerer_name character varying(60) COLLATE pg_catalog."default",   
 --     answerer_email character varying(60) COLLATE pg_catalog."default",
 --     report integer,
@@ -37,7 +39,7 @@ UPDATE questionAnswers SET question_id = DEFAULT;
 --     OIDS = FALSE
 -- );
 
--- COPY answers FROM '/Users/admin/Desktop/answers.csv' DELIMITER ',' CSV HEADER;
+-- \COPY  answers FROM 'csv/answers.csv' DELIMITER ',' CSV HEADER;
 
 -- ALTER TABLE answers
 -- ADD COLUMN photos jsonb[] DEFAULT '{}'::jsonb[];
