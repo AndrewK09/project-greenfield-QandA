@@ -10,11 +10,10 @@ fs.createReadStream(path.join(__dirname, './csv/answers_photos.csv'), options)
   .pipe(csv.parse({ headers: true }))
   .on('data', row => {
     let photo = JSON.stringify({ id: row.id, url: row[' url'] });
-    return db
-      .any(
-        `UPDATE answers SET photos = $2::jsonb || photos   WHERE answer_id = $1;`,
-        [row[' answer_id'], photo]
-      )
+    db.any(
+      `UPDATE answers SET photos = photos || $2::jsonb   WHERE answer_id = $1;`,
+      [row[' answer_id'], photo]
+    )
       .then(() => {
         totalCount++;
         if (totalCount % 100000 === 0) {
