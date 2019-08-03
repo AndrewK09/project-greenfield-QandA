@@ -8,4 +8,10 @@ module.exports = {
       [question_id, count]
     );
   },
+  addAnswer: (question_id, { body, name, email, photos }) => {
+    return db.any(
+      `INSERT INTO answers (question_id, question_body, asker_name, asker_email) VALUES ($1, $2, $3, $4)`,
+      [question_id, body, name, email]
+    );
+  },
 };
