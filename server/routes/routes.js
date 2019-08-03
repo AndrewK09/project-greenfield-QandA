@@ -6,6 +6,6 @@ router.get('/:product_id/:page?/:count?', questionController.getQuestions);
 router.post('/:product_id', questionController.addQuestion);
 
 router.get('/:question_id/answers/:page?/:count?', answerController.getAnswers);
-router.post('/:question_id', answerController.addAnswer);
+router.post('/:question_id/answers', answerController.addAnswer);
 
 module.exports = router;
