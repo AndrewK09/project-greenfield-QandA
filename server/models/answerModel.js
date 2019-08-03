@@ -35,4 +35,15 @@ module.exports = {
         );
       });
   },
+  markHelpful: answer_id => {
+    return db.none(
+      `update answers set helpfulness = helpfulness + 1 where answer_id = $1;`,
+      [answer_id]
+    );
+  },
+  report: answer_id => {
+    return db.none(`update answers set report = 1 where answer_id = $1;`, [
+      answer_id,
+    ]);
+  },
 };
