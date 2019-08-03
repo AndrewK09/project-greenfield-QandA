@@ -23,13 +23,13 @@ module.exports = {
         res.sendStatus(500);
       });
   },
-  addQuestion: (req, res) => {
+  addAnswer: (req, res) => {
     console.time();
     const { question_id } = req.params;
     const { body } = req;
 
     model
-      .addQuestion(question_id, body)
+      .addAnswer(question_id, body)
       .then(() => {
         res.sendStatus(201);
       })
