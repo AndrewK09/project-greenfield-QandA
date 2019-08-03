@@ -22,8 +22,17 @@ module.exports = {
   },
   addQuestion: (req, res) => {
     console.time();
-    console.log('req.params.product_id', req.params.product_id);
-    console.log('req.body', req.body);
-    res.sendStatus(201);
+    const { product_id } = req.params;
+    const { body } = req;
+
+    model
+      .addQuestion(product_id, body)
+      .then(() => {
+        res.sendStatus(201);
+      })
+      .catch(err => {
+        console.log(err);
+        res.sendStatus(500);
+      });
   },
 };
