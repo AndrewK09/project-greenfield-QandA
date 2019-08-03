@@ -23,4 +23,19 @@ module.exports = {
         res.sendStatus(500);
       });
   },
+  addQuestion: (req, res) => {
+    console.time();
+    const { question_id } = req.params;
+    const { body } = req;
+
+    model
+      .addQuestion(question_id, body)
+      .then(() => {
+        res.sendStatus(201);
+      })
+      .catch(err => {
+        console.log(err);
+        res.sendStatus(500);
+      });
+  },
 };
