@@ -6,12 +6,14 @@ const fs = require('fs');
 let totalCount = 0;
 
 let options = { highWaterMark: 256 * 1024 };
-fs.createReadStream(path.join(__dirname, './csv/answers_photos.csv'), options)
+fs.createReadStream(path.join(__dirname, './csv/answers_photos.csv'), {
+  options,
+})
   .pipe(csv.parse({ headers: true }))
   .on('data', row => {
     let photo = JSON.stringify({ id: row.id, url: row[' url'] });
     db.any(
-      `UPDATE answers SET photos = photos || $2::jsonb   WHERE answer_id = $1;`,
+      `UPDATE answers SET photos = photos || $2::jsonb WHERE answer_id = $1;`,
       [row[' answer_id'], photo]
     )
       .then(() => {
