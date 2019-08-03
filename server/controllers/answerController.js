@@ -2,7 +2,7 @@ const model = require('../models/answerModel.js');
 
 module.exports = {
   getAnswers: (req, res) => {
-    console.time();
+    console.time('getAnswers');
     const { question_id, page = 1, count = 5 } = req.params;
 
     model
@@ -15,7 +15,7 @@ module.exports = {
           results: result,
         };
 
-        console.timeEnd();
+        console.timeEnd('getAnswers');
         res.send(data);
       })
       .catch(err => {
@@ -24,13 +24,14 @@ module.exports = {
       });
   },
   addAnswer: (req, res) => {
-    console.time();
+    console.time('addAnswer');
     const { question_id } = req.params;
     const { body } = req;
 
     model
       .addAnswer(question_id, body)
       .then(() => {
+        console.timeEnd('addAnswer');
         res.sendStatus(201);
       })
       .catch(err => {
