@@ -48,5 +48,17 @@ module.exports = {
         res.sendStatus(500);
       });
   },
-  report: (req, res) => {},
+  report: (req, res) => {
+    const { question_id } = req.params;
+
+    model
+      .report(question_id)
+      .then(() => {
+        res.sendStatus(204);
+      })
+      .catch(err => {
+        console.log(err);
+        res.sendStatus(500);
+      });
+  },
 };
