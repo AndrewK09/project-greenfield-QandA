@@ -33,4 +33,10 @@ module.exports = {
       [product_id, body, name, email]
     );
   },
+  markHelpful: question_id => {
+    return db.none(
+      `update questions set helpfulness = helpfulness + 1 where question_id = $1;`,
+      [question_id]
+    );
+  },
 };
