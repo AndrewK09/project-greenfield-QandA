@@ -38,6 +38,30 @@ module.exports = {
         res.sendStatus(500);
       });
   },
-  markHelpful: (req, res) => {},
-  report: (req, res) => {},
+  markHelpful: (req, res) => {
+    const { answer_id } = req.params;
+
+    model
+      .markHelpful(answer_id)
+      .then(() => {
+        res.sendStatus(204);
+      })
+      .catch(err => {
+        console.log(err);
+        res.sendStatus(500);
+      });
+  },
+  report: (req, res) => {
+    const { answer_id } = req.params;
+
+    model
+      .report(answer_id)
+      .then(() => {
+        res.sendStatus(204);
+      })
+      .catch(err => {
+        console.log(err);
+        res.sendStatus(500);
+      });
+  },
 };
