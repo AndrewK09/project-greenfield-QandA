@@ -39,4 +39,10 @@ module.exports = {
       [question_id]
     );
   },
+  report: question_id => {
+    return db.none(
+      `update questions set reported = 1 where question_id = $1;`,
+      [question_id]
+    );
+  },
 };
