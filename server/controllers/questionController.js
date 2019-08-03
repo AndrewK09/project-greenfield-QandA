@@ -18,7 +18,7 @@ module.exports = {
       .catch(err => {
         console.log(err);
         res.sendStatus(500);
-      });
+      });:
   },
   addQuestion: (req, res) => {
     console.time();
@@ -35,4 +35,11 @@ module.exports = {
         res.sendStatus(500);
       });
   },
+  markHelpful: (req, res) => {
+
+  },
+  report: (req, res) => {
+    
+  }
+
 };
