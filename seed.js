@@ -11,7 +11,7 @@ fs.createReadStream(path.join(__dirname, './csv/answers_photos.csv'), options)
   .on('data', row => {
     let photo = JSON.stringify({ id: row.id, url: row[' url'] });
     db.query(
-      `UPDATE answers SET photos = photos || $2::jsonb WHERE answer_id = $1;`,
+      `UPDATE answers SET photos = $2::jsonb || photos WHERE answer_id = $1;`,
       [row[' answer_id'], photo],
       (err, result) => {
         if (err) console.log(err);
