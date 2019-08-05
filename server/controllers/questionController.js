@@ -4,14 +4,14 @@ module.exports = {
   getQuestions: (req, res) => {
     console.time('getQuestions');
     const { product_id, page = 1, count = 5 } = req.params;
-    let data = {
-      product_id: product_id,
-      results: [],
-    };
 
     model
-      .getQuestions(product_id, count, data)
-      .then(() => {
+      .getQuestions(product_id, count)
+      .then(results => {
+        let data = {
+          product_id,
+          results,
+        };
         console.timeEnd('getQuestions');
         res.send(data);
       })
