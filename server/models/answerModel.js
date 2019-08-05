@@ -1,11 +1,11 @@
 const db = require('../../database/database.js');
 
 module.exports = {
-  getAnswers: (question_id, count, page) => {
+  getAnswers: (question_id, count, offset) => {
     return db.any(
       `SELECT answer_id, body, date, answerer_name, helpfulness, photos 
         FROM answers WHERE question_id = $1 AND report = 0 LIMIT $2 OFFSET $3`,
-      [question_id, count, page * count]
+      [question_id, count, offset]
     );
   },
   addAnswer: (question_id, { body, name, email, photos }) => {

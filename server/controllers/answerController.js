@@ -4,9 +4,10 @@ module.exports = {
   getAnswers: (req, res) => {
     console.time('getAnswers');
     const { question_id, page = 0, count = 5 } = req.params;
+    let offset = page === 0 ? 0 : page * count;
 
     model
-      .getAnswers(question_id, count, page)
+      .getAnswers(question_id, count, offset)
       .then(result => {
         let data = {
           question: question_id,

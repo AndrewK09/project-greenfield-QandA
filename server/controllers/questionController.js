@@ -4,8 +4,11 @@ module.exports = {
   getQuestions: (req, res) => {
     console.time('getQuestions');
     const { product_id, page = 0, count = 5 } = req.params;
+
+    let offset = page === 0 ? 0 : page * count;
+
     model
-      .getQuestions(product_id, count, page)
+      .getQuestions(product_id, count, offset)
       .then(results => {
         let data = {
           product_id,
