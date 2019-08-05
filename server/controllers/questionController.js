@@ -3,10 +3,9 @@ const model = require('../models/questionModel.js');
 module.exports = {
   getQuestions: (req, res) => {
     console.time('getQuestions');
-    const { product_id, page = 1, count = 5 } = req.params;
-
+    const { product_id, page = 0, count = 5 } = req.params;
     model
-      .getQuestions(product_id, count)
+      .getQuestions(product_id, count, page)
       .then(results => {
         let data = {
           product_id,

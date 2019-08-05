@@ -3,14 +3,14 @@ const model = require('../models/answerModel.js');
 module.exports = {
   getAnswers: (req, res) => {
     console.time('getAnswers');
-    const { question_id, page = 1, count = 5 } = req.params;
+    const { question_id, page = 0, count = 5 } = req.params;
 
     model
-      .getAnswers(question_id, count)
+      .getAnswers(question_id, count, page)
       .then(result => {
         let data = {
           question: question_id,
-          page: page - 1,
+          page: page,
           count: count,
           results: result,
         };

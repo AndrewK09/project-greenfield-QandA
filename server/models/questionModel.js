@@ -1,11 +1,11 @@
 const db = require('../../database/database.js');
 
 module.exports = {
-  getQuestions: (product_id, count) => {
+  getQuestions: (product_id, count, page) => {
     return db
       .any(
-        'SELECT question_id, question_body, question_date, asker_name, question_helpfulness FROM questions WHERE product_id = $1 AND reported = 0 LIMIT $2',
-        [product_id, count]
+        'SELECT question_id, question_body, question_date, asker_name, question_helpfulness FROM questions WHERE product_id = $1 AND reported = 0 LIMIT $2 OFFSET $3',
+        [product_id, count, page * count]
       )
       .then(questions => {
         return Promise.all(
