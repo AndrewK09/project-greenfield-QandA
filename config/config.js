@@ -1,9 +1,7 @@
 module.exports = {
-  PG_CONFIG: {
-    user: 'admin',
-    host: 'localhost',
-    database: 'questionAnswers',
-    password: '',
-    port: 5432,
-  },
+  pgUser: process.env.PGUSER,
+  pgHost: process.env.PGHOST,
+  pgDatabase: process.env.PGDATABASE,
+  pgPassword: process.env.PGPASSWORD,
+  pgPort: process.env.PGPORT,
 };
