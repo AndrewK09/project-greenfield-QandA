@@ -1,17 +1,15 @@
 const db = require('../../database/database.js');
 
 module.exports = {
-  getQuestions: (product_id, count, data) => {
+  getQuestions: (product_id, count, offset) => {
     return db
       .any(
-        'SELECT question_id, question_body, question_date, asker_name, question_helpfulness FROM questions WHERE product_id = $1 AND reported = 0 LIMIT $2',
-        [product_id, count]
+        'SELECT question_id, question_body, question_date, asker_name, question_helpfulness FROM questions WHERE product_id = $1 AND reported = 0 LIMIT $2 OFFSET $3',
+        [product_id, count, offset]
       )
-      .then(result => {
-        data.results = result;
-
+      .then(questions => {
         return Promise.all(
-          data.results.map(question => {
+          questions.map(question => {
             question.answers = {};
             return db
               .any(
@@ -22,6 +20,7 @@ module.exports = {
                 for (let answer of answers) {
                   question.answers[answer.id] = answer;
                 }
+                return question;
               });
           })
         );

@@ -1,3 +1,6 @@
 node_modules
 csv
+dev.js
+config.js
 docker-compose.yml
+prod.js
