@@ -7,10 +7,6 @@ app.use(bodyParser.json());
 const cors = require('cors');
 app.use(cors());
 
-app.get('/', (req, res) => {
-  res.send('bye');
-});
-
 const routes = require('./routes/routes.js');
 app.use('/qa', routes);
 
