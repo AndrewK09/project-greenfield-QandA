@@ -4,7 +4,6 @@ module.exports = {
   getQuestions: (req, res) => {
     console.time('getQuestions');
     const { product_id, page = 0, count = 5 } = req.params;
-
     let offset = page === 0 ? 0 : page * count;
 
     model
