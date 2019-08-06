@@ -1,5 +1,6 @@
 node_modules
 csv
-docker-compose.yml
 dev.js
+config.js
+docker-compose.yml
 prod.js
