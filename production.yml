@@ -1,7 +1,7 @@
 version: '3'
 services:
   postgres:
-    image: 'andrewkn09/postgres'
+    image: 'postgres:latest'
     restart: always
     ports:
       - '5432:5432'
@@ -11,14 +11,23 @@ services:
       - POSTGRES_PASSWORD=test
     volumes:
       - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
-      - ./csv:/docker-entrypoint-initdb.d/csv
+      - ../efs/csv:/docker-entrypoint-initdb.d/csv
   server:
-    image: 'andrewkn09/qanda_server'
+    build:
+      # Specify where we want files to be pulled from
+      context: .
+      # Name of dockerfile
+      dockerfile: ./server/Dockerfile.dev
     ports:
       - '3000:3000'
+    volumes:
+      - /app/node_modules
+      - .:/app/
     environment:
       - PGUSER=root
       - PGHOST=host.docker.internal
       - PGDATABASE=question_answers
       - PGPASSWORD=test
       - PGPORT=5432
+volumes:
+  pgdata:
