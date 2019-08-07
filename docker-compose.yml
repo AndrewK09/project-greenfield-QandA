@@ -11,7 +11,7 @@ services:
       - POSTGRES_PASSWORD=test
     volumes:
       - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
-      - ./csv:/docker-entrypoint-initdb.d/csv
+      - ../efs/csv:/docker-entrypoint-initdb.d/csv
   server:
     build:
       # Specify where we want files to be pulled from
