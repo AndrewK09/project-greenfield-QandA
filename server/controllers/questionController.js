@@ -8,7 +8,6 @@ module.exports = {
     model
       .getQuestions(product_id, count, offset)
       .then(results => {
-        console.log(results);
         let data = {
           product_id,
           results,
