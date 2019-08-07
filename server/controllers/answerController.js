@@ -3,8 +3,8 @@ const model = require('../models/answerModel.js');
 module.exports = {
   getAnswers: (req, res) => {
     console.time('getAnswers');
-    const { question_id, page = 0, count = 5 } = req.params;
-    let offset = page === 0 ? 0 : page * count;
+    const { question_id, page = 1, count = 5 } = req.params;
+    let offset = parseInt(page) === 1 ? 0 : page * count;
 
     model
       .getAnswers(question_id, count, offset)

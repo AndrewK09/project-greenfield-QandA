@@ -3,12 +3,12 @@ const model = require('../models/questionModel.js');
 module.exports = {
   getQuestions: (req, res) => {
     console.time('getQuestions');
-    const { product_id, page = 0, count = 5 } = req.params;
-    let offset = page === 0 ? 0 : page * count;
-
+    const { product_id, page = 1, count = 5 } = req.params;
+    let offset = parseInt(page) === 1 ? 0 : page * count;
     model
       .getQuestions(product_id, count, offset)
       .then(results => {
+        console.log(results);
         let data = {
           product_id,
           results,
