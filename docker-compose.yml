@@ -25,7 +25,7 @@ services:
       - .:/app/
     environment:
       - PGUSER=root
-      - PGHOST=host.docker.internal
+      - PGHOST=postgres
       - PGDATABASE=question_answers
       - PGPASSWORD=test
       - PGPORT=5432
