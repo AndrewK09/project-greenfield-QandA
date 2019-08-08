@@ -17,7 +17,7 @@ services:
       # Specify where we want files to be pulled from
       context: .
       # Name of dockerfile
-      dockerfile: ./server/Dockerfile.dev
+      dockerfile: Dockerfile.dev
     ports:
       - '3000:3000'
     volumes:
