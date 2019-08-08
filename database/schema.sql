@@ -41,7 +41,7 @@ CREATE TABLE photos
 
 /* Seed database */
 \COPY questions FROM './docker-entrypoint-initdb.d/csv/questions.csv' DELIMITER ',' CSV HEADER;
-\COPY answers FROM './docker-entrypoint-initdb.d/csv/new_answers.csv' DELIMITER ',' CSV HEADER;
+\COPY answers FROM './docker-entrypoint-initdb.d/csv/answers2.csv' DELIMITER ',' CSV HEADER;
 \COPY photos from './docker-entrypoint-initdb.d/csv/answers_photos.csv' DELIMITER ',' CSV HEADER;
 
 /* Update */
@@ -50,5 +50,5 @@ SELECT setval('answers_answer_id_seq', (SELECT count(*) from answers), true);
 SELECT setval('photos_id_seq', (SELECT count(*) from photos), true); 
 
 /* Index */
-CREATE INDEX on questions (product_id)
-CREATE INDEX on answers (question_id)
+CREATE INDEX on questions (product_id);
+CREATE INDEX on answers (question_id);
