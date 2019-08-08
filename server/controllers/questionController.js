@@ -2,6 +2,7 @@ const model = require('../models/questionModel.js');
 
 module.exports = {
   getQuestions: (req, res) => {
+    console.time();
     const { product_id, page = 1, count = 5 } = req.params;
     let offset = parseInt(page) === 1 ? 0 : page * count;
     model
@@ -11,6 +12,7 @@ module.exports = {
           product_id,
           results,
         };
+        console.timeEnd();
         res.send(data);
       })
       .catch(err => {
