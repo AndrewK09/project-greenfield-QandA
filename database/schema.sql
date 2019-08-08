@@ -52,5 +52,5 @@ SELECT setval('photos_id_seq', (SELECT count(*) from photos), true);
 /* Index */
 CREATE INDEX on questions (product_id);
 CREATE INDEX on questions (reported);
-CREATE INDEX on answers (question_id) where report = 0;
+CREATE INDEX on answers (question_id);
 CREATE INDEX on answers (report);
