@@ -17,9 +17,9 @@ module.exports = {
                 [question.question_id]
               )
               .then(answers => {
-                for (let answer of answers) {
+                answers.forEach(answer => {
                   question.answers[answer.id] = answer;
-                }
+                });
                 return question;
               });
           })
