@@ -3,4 +3,5 @@ csv
 dev.js
 config.js
 prod.js
+coverage
 dist
