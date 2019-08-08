@@ -1,0 +1,9 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t andrewkn09/QandA -f server/Dockerfile.dev .
+
+script:
+  - docker run -e CI=true andrewkn09/QandA npm run test
