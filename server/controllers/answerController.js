@@ -8,7 +8,6 @@ module.exports = {
     model
       .getAnswers(question_id, count, offset)
       .then(({ rows }) => {
-        console.log(rows);
         let data = {
           question: question_id,
           page: page,
