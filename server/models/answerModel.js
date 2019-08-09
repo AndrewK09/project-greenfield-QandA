@@ -2,7 +2,7 @@ const db = require('../../database/database.js');
 
 module.exports = {
   getAnswers: (question_id, count, offset) => {
-    return db.any(
+    return db.query(
       `SELECT answer_id, body, date, answerer_name, helpfulness, photos 
         FROM answers WHERE question_id = $1 AND report = 0 LIMIT $2 OFFSET $3`,
       [question_id, count, offset]
@@ -10,7 +10,7 @@ module.exports = {
   },
   addAnswer: (question_id, { body, name, email, photos }) => {
     return db
-      .one(
+      .query(
         `INSERT INTO answers (question_id, body, answerer_name, answerer_email) VALUES ($1, $2, $3, $4) RETURNING answer_id`,
         [question_id, body, name, email]
       )
@@ -26,7 +26,7 @@ module.exports = {
               )
               .then(({ id }) => {
                 let photo = JSON.stringify({ id, url });
-                return db.any(
+                return db.query(
                   `UPDATE answers SET photos = photos || $1::jsonb WHERE answer_id = $2;`,
                   [photo, answer_id]
                 );
@@ -36,13 +36,13 @@ module.exports = {
       });
   },
   markHelpful: answer_id => {
-    return db.none(
+    return db.query(
       `update answers set helpfulness = helpfulness + 1 where answer_id = $1;`,
       [answer_id]
     );
   },
   report: answer_id => {
-    return db.none(`update answers set report = 1 where answer_id = $1;`, [
+    return db.query(`update answers set report = 1 where answer_id = $1;`, [
       answer_id,
     ]);
   },
