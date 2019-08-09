@@ -5,3 +5,4 @@ config.js
 prod.js
 coverage
 dist
+journal.md
