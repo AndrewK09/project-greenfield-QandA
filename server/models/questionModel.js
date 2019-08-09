@@ -13,12 +13,12 @@ module.exports = {
             question.answers = {};
             return db
               .any(
-                'SELECT answer_id, body, date, answerer_name, helpfulness, photos FROM answers WHERE question_id = $1 AND report = 0',
+                'SELECT answer_id AS id, body, date, answerer_name, helpfulness, photos FROM answers WHERE question_id = $1 AND report = 0',
                 [question.question_id]
               )
               .then(answers => {
                 for (let answer of answers) {
-                  question.answers[answer.answer_id] = answer;
+                  question.answers[answer.id] = answer;
                 }
                 return question;
               });
