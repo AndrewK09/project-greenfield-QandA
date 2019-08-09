@@ -8,7 +8,6 @@ const db = new Pool({
   database: config.dbDatabase,
   password: config.pgPassword,
   port: config.pgPort,
-  max: 10,
 });
 
 //TODO: add on error handler
