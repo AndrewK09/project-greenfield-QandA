@@ -7,12 +7,12 @@ module.exports = {
 
     model
       .getAnswers(question_id, count, offset)
-      .then(({ rows }) => {
+      .then(result => {
         let data = {
           question: question_id,
           page: page,
           count: count,
-          results: rows,
+          results: result,
         };
         res.send(data);
       })
