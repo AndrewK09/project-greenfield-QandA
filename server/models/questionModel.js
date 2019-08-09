@@ -16,7 +16,6 @@ module.exports = {
                 [question.question_id]
               )
               .then(({ rows }) => {
-                console.log('rows :', rows);
                 for (let answer of rows) {
                   question.answers[answer.id] = answer;
                 }
