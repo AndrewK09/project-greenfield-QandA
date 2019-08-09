@@ -12,12 +12,13 @@ module.exports = {
             question.answers = {};
             return db
               .query(
-                'SELECT answer_id, body, date, answerer_name, helpfulness, photos FROM answers WHERE question_id = $1 AND report = 0',
+                'SELECT answer_id as id, body, date, answerer_name, helpfulness, photos FROM answers WHERE question_id = $1 AND report = 0',
                 [question.question_id]
               )
               .then(({ rows }) => {
+                console.log('rows :', rows);
                 for (let answer of rows) {
-                  question.answers[answer.answer_id] = answer;
+                  question.answers[answer.id] = answer;
                 }
                 return question;
               });

@@ -14,13 +14,14 @@ module.exports = {
         `INSERT INTO answers (question_id, body, answerer_name, answerer_email) VALUES ($1, $2, $3, $4) RETURNING answer_id`,
         [question_id, body, name, email]
       )
-      .then(({ answer_id }) => {
+      .then(({ rows }) => {
+        let answer_id = rows[0].answer_id;
         return Promise.all(
           photos.map(url => {
             //insert the url and return the id
             //insert into answer photos object containing returned id and url
             return db
-              .one(
+              .query(
                 `INSERT INTO photos (answer_id, url) VALUES ($1, $2) RETURNING id;`,
                 [answer_id, url]
               )
