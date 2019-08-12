@@ -1,9 +1,0 @@
-sudo: required
-services:
-  - docker
-
-before_install:
-  - docker build -t andrewkn09/qanda -f Dockerfile.dev .
-
-script:
-  - docker run -e CI=true andrewkn09/qanda npm run test
