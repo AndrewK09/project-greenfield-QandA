@@ -25,6 +25,7 @@ services:
       dockerfile: Dockerfile.dev
     links:
       - redis_db
+      - postgres
     ports:
       - '3000:3000'
     volumes:
