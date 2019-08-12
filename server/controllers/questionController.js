@@ -1,13 +1,5 @@
 const model = require('../models/questionModel.js');
 const client = require('../redis-client');
-// client
-//   .flushAsync()
-//   .then(success => {
-//     console.log(success);
-//   })
-//   .catch(err => {
-//     console.log(err);
-//   });
 module.exports = {
   getQuestions: async (req, res) => {
     let url = req.headers.host + '/' + req.url;
