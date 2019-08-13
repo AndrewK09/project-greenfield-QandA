@@ -25,8 +25,8 @@ services:
       dockerfile: Dockerfile.dev
     links:
       - redis_db
-    ports:
-      - '3000:3000'
+    expose:
+      - '5000'
     volumes:
       - /app/node_modules
       - .:/app/
@@ -37,5 +37,13 @@ services:
       - PGDATABASE=question_answers
       - PGPASSWORD=test
       - PGPORT=5432
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - server
+    ports:
+      - '3000:3000'
 volumes:
   pgdata:
