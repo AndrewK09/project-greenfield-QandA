@@ -1,0 +1,27 @@
+version: '3'
+services:
+  redis_db:
+    image: redis
+    container_name: cache
+    expose:
+      - 6379
+  server:
+    build:
+      # Specify where we want files to be pulled from
+      context: ../
+      # Name of dockerfile
+      dockerfile: Dockerfile.dev
+    links:
+      - redis_db
+    expose:
+      - '5000'
+    volumes:
+      - /app/node_modules
+      - ../:/app/
+    environment:
+      - REDIS_URL=redis://redis_db:6379
+      - PGUSER=root
+      - PGHOST=postgres
+      - PGDATABASE=question_answers
+      - PGPASSWORD=test
+      - PGPORT=5432
