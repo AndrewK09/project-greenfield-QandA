@@ -1,6 +1,17 @@
 const redis = require('redis');
 const { promisify } = require('util');
-const client = redis.createClient(process.env.REDIS_URL);
+const client = redis.createClient({ url: process.env.REDIS_URL });
+client.on('connect', err => {
+  if (err) {
+    console.log(err);
+  }
+  client.flushdb((err, success) => {
+    if (err) {
+      console.log(err);
+    }
+    console.log(success);
+  });
+});
 
 module.exports = {
   ...client,
