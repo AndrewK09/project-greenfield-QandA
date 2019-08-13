@@ -18,7 +18,6 @@ module.exports = {
             results,
           };
           return client.setAsync(url, JSON.stringify(data)).then(result => {
-            console.log('new cache');
             res.send(data);
           });
         })
